@@ -1,0 +1,13 @@
+var gr= new GlideRecord('asmt_assessment_instance');
+gr.addEncodedQuery('state=ready^metric_type=d504c0f497e5611008b471571153af41');
+gr.addQuery();
+while(gr.next())
+    {
+        var currentDate= new GlideDateTime();
+        var createDate= new GlideDateTime(gr.sys_created_on);
+        var sub =GlideDateTime.subtract(createDate,currentDate);
+        if(sub==7)
+            {
+                gs.eventQueue('Survey_Task2',gr);
+            }
+    }
