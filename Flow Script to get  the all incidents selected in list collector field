@@ -1,0 +1,16 @@
+var vr= fd_data._1__get_catalog_variables.select_incidents
+vr=vr.toString();
+var vrString = vr.split(','); 
+var output = ''; 
+for (var i = 0; i < vrString.length; i++) 
+{
+    var gr = new GlideRecord('incident'); 
+    gr.addQuery('sys_id', vrString[i]); 
+    gr.query(); 
+    while (gr.next()) 
+    {
+        var incidentNumber = gr.number; 
+        output += incidentNumber + ','; 
+    } 
+}
+return output;
