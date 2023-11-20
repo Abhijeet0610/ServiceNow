@@ -1,0 +1,16 @@
+function onSubmit() {
+    var multiple = JSON.parse(parent.g_form.getValue("reason"));
+    var obj = {
+        'reason_choice': g_form.getValue('reason_choice'),
+        'sub_reason_billing_issue': g_form.getValue('sub_reason_billing_issue'),
+    };
+    if (multiple) {
+        var result = multiple.filter(function(item) {
+            return (item.reason_choice == obj.reason_choice && item.sub_reason_billing_issue == obj.sub_reason_billing_issue);
+        });
+        if (result.length > 0) {
+            g_form.addErrorMessage("You can't fill duplicate");
+            return false;
+        }
+    }
+}
