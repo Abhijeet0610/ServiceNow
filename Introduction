@@ -1,0 +1,19 @@
+Good Morning everyone, My name is Abhijeet Singh and I am working as a ServiceNow Developer from past 3 years in Bangmetric Services. While working as a Developer I had worked upon ITSM and HRSD suites of Servicenow .I have good knowledge of Incident management, case management both  types of scripts,virtual agent,UI policies &UI Actions.
+ 
+During these three years I had worked upon three projects.
+1.Learning Management System:
+in this project we automate the process  of training enrollments.We created a record producer which was only for the trainers group so that can go and create training schedule like start date,end date last enrollment date and created a widget for all the employees of the organization that is visible on the portal so they can go to the  and enroll the for the trainings whichever they want and some validations also like when last enrollment date passed enroll button will be read only and if the person is allready enrolled pop up a message you are allready enrolled and also represented list of trainings in which the employee is enrolled.
+ 
+ 
+2.Biographical Request Tracer :
+In this project we developed an end to end UI for biographical Request application and implemented document template plugin for document generation.
+created  flows as per client requirement write ui policy and security rules for validation and acess control. evoloved document template plugin to generate different documents.write si and worked on ui action to active document generation.
+ 
+ 
+3.On-Boarding&Relocation Assistance:
+For this project,we created some RecordProducers for on-boarding,relocation, work from home, and upload documentsand developed their respected flows using flow and lifecycle events.
+In workFromHome we also added some extra validations,such as person can only requests work from home for that are allowed to him and a monthly reset for the balance.
+We used Lifecycle events for the pre-boarding and on-boarding flows and for relocation we triggered distinct flows based on country.
+Finally all flows require  document submission. we send a notification with redirection link and after sumbission it automaticaly move documents to EDM.
+ 
+Throughout my journey, I have developed a strong understanding of ServiceNow's platform capabilities ,and best practices.
