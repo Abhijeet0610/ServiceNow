@@ -1,0 +1,56 @@
+//UI PAGE SCRIPT
+<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <g:evaluate var="jvar_text" expression="RP.getWindowProperties().get('sysparm_number')"></g:evaluate>
+    <label>For the Universal Request Number:</label>
+    <input type='text' id='reNum' name='reNum' value='${jvar_text}'></input><br></br>
+<label>Enter Short Description for new Incident Task:</label><br></br>
+    <textarea type='text' id='shortD' name='shortD'></textarea><br></br>
+    <button onclick='updateinDatabase()'>Submit</button>
+</j:jelly>
+
+//CLIENT SCRIPT UI PAGE
+function updateinDatabase() {
+    var ga = new GlideAjax('makeIncidentTaskRecord');
+    ga.addParam('sysparm_name', 'make');
+    ga.addParam('sysparm_number', gel('reNum').value);
+    ga.addParam('sysparm_shortD', gel('shortD').value);
+    ga.getXML(callBackFunction);
+    function callBackFunction(response) {
+        var answer = response.responseXML.documentElement.getAttribute('answer');
+        if (answer) {
+            g_form.addInfoMessage('Record has been Created Successfully');
+        }
+    }
+}
+
+//SCRIPT INCLUDE 
+var makeIncidentTaskRecord = Class.create();
+makeIncidentTaskRecord.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+    make: function() {
+        var pNumber = this.getParameter('sysparm_number');
+        var shortD = this.getParameter('sysparm_shortD');
+        var grA=new GlideRecord('incident');
+        grA.addQuery('number',pNumber);
+        grA.query();
+        if(grA.next())
+            {
+                var uRequest=grA.sys_id;
+            }
+        var gr = new GlideRecord("incident_task");
+        gr.newRecord();
+        gr.universal_request = uRequest;
+        gr.short_description = shortD;
+        gr.insert();
+        return pNumber;
+    },
+    type: 'makeIncidentTaskRecord'
+});
+
+//UI ACTION SCRIPT
+function createTask() {
+    var gdw = new GlideDialogWindow('createIncidentTask');
+    gdw.setTitle('Create a new Incident Task');
+    gdw.setPreference('sysparm_number', g_form.getValue('number'));
+    gdw.render();
+}
