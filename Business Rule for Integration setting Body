@@ -1,0 +1,21 @@
+(function executeRule(current, previous /*null when async*/ ) {
+
+    try {
+        var r = new sn_ws.RESTMessageV2('makeIncidentinDev1', 'POST in Dev1');
+        var body = {
+            "short_description": current.getDisplayValue("short_description"),
+            "caller_id": current.getDisplayValue("caller_id"),
+            "correlation_id": current.getDisplayValue("number")
+        };
+
+
+        r.setRequestBody(JSON.stringify(body));
+        var responseBody = response.getBody();
+        var httpStatus = response.getStatusCode();
+        gs.addInfoMessage(responseBody);
+        gs.addInfoMessage(httpStatus);
+        var response = r.execute();
+    } catch (ex) {
+        var message = ex.message;
+    }
+})(current, previous);
