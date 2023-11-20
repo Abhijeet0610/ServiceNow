@@ -1,0 +1,13 @@
+function onLoad() {
+    var pIncident =g_form.getDisplayBox('parent_incident').value;
+    var sys_id=g_form.getValue('parent_incident');
+    var link='<a href="https://dev75588.service-now.com/now/nav/ui/classic/params/target/incident.do%3Fsys_id='+sys_id+'" target = "_blank" >'+ pIncident+ '</a>';
+    if(pIncident=='')
+        {
+            g_form.addErrorMessage('No Parent Incident found');
+        }
+    else
+        {
+            g_form.addInfoMessage('Parent Incident No is:'+link);
+        }
+}
