@@ -1,0 +1,24 @@
+function isWeekend(currentDate) {
+  var day = currentDate.getDayOfWeek();
+  if(day == 6 || day == 7)
+  {
+    return 1;
+  }
+}
+
+var workingDays=0;
+var weekend=0;
+var i=0;
+var currentDate =new GlideDateTime();
+var lastDate = new GlideDateTime('2023-07-31')
+while(currentDate <= lastDate) {
+    if (isWeekend(currentDate)) {
+        weekend++;
+     }
+    else{
+        workingDays++;
+    }
+    currentDate.addDaysUTC(1);
+}
+gs.log(workingDays);
+gs.log(weekend);
