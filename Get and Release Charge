@@ -1,0 +1,31 @@
+//Client Script for GET Charge
+function onLoad() {
+    g_form.setDisplay('u_hidden', false);
+    var sysID = g_form.getValue('u_hidden');
+    if (sysID != '') {
+        var currentUserSysId = g_user.userID;
+        if (sysID != currentUserSysId) {
+            g_form.setReadOnly('subcategory', true);
+            g_form.setReadOnly('description', true);
+        }
+    } else if (sysID == '') {
+            g_form.setReadOnly('subcategory', false);
+        g_form.setReadOnly('description', false);
+    }
+}
+
+//UI action script for GET Charge
+function onClick() {
+    var currentUserSysId = g_user.userID;
+    g_form.setValue('u_hidden', currentUserSysId);
+    g_form.save();
+    }
+
+//UI action script Condition for release charge
+current.u_hidden == ""||current.u_hidden == gs.getUserID();
+
+//UI action script for Release Charge
+function func() {
+    g_form.setValue("u_hidden", "");
+    g_form.save();
+}
