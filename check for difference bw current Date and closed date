@@ -1,0 +1,15 @@
+var gr= new GlideRecord('incident');
+gr.addEncodedQuery('state=7');
+gr.query();
+var i=0;
+while(gr.next())
+{
+    var currentDate= new GlideDateTime();
+    var lastUpdated = new GlideDateTime(gr.closed_at);
+    var diff =GlideDateTime.subtract(lastUpdated,currentDate);
+    if(diff==7)
+    {
+        gs.print(i);
+        i++;
+    }
+}
