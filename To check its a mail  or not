@@ -1,0 +1,9 @@
+var res = String(newValue).toLowerCase().match(/^\S+@\S+\.\S+$/);
+
+    if(!res){
+
+        g_form.clearValue('u_email_only');
+
+        g_form.showErrorBox('u_email_only','Please enter valid email',true);
+
+    }
