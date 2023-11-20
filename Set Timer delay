@@ -1,0 +1,6 @@
+var setTimer = '';
+        setTimer = setTimeout(setTimerDelay, 2000);
+
+        function setTimerDelay() {
+            g_form.setValue('to_date', oldValue);
+        }
