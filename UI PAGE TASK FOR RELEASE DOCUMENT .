@@ -1,0 +1,80 @@
+//1.Make a UI page appeared when clicked on context document.
+//2.UI page field first field  will be populated in a hidden field on form.
+//3.At last print a document
+
+//UI ACTION
+function entityAndDocumentType() {
+    var gdw = new GlideDialogWindow('entityAndDocumentType');
+    gdw.render();
+}
+
+//UI Page
+<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+   <g:ui_form id="f_id">
+      <center>
+         <h2>Biographical Form:</h2>
+         <table>
+            <tr>
+               <td>Entity : </td>
+               <td>
+                  <g:ui_reference name="u_name" query="active=true" id="u_name" table="sys_user" style="width:180px"/>
+               </td>
+            <tr>
+            <tr></tr>
+            <tr>
+               <td>Document Type :</td>
+               <td>
+                  <select name="cat_id" id="c_id">
+                     <option value="0">None</option>
+                     <option value="affidavit">NAIC Biographical Affidavit</option>
+                     <option value="supplement">NAIC Supplement</option>
+                     <option value="releasemost">NAIC State Release(Most)</option>
+                     <option value="releasemn">NAIC State Release(MN/OK)</option>
+                     <option value="all">All For Review</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td><input type="submit" name="submit" onClick="onSubmit()"/></td>
+               <td><input type="reset" name="reset"  onClick="onReset()" style="width:180px"/> 
+               </td>
+            </tr>
+            </tr></tr>
+         </table>
+      </center>
+   </g:ui_form>
+</j:jelly>
+
+//CLIENT SCRIPT UI PAGE
+function onReset() {
+    document.getElementById("u_name").reset();
+
+}
+
+function onSubmit() {
+    var category = document.getElementById("u_name").value;
+    // g_form.setValue('u_entity',category);
+
+    // document.getElementById('c_id').value;
+
+    var ga=new GlideAjax('uiPage');
+    ga.addParam('sysparm_name','pages');
+    ga.addParam('sysparm_sysID',g_form.getUniqueValue());
+    ga.addParam('sysparm_entity',category);
+    ga.getXML(callBackFunction);
+
+    function callBackFunction(response)
+    {
+        var answer=response.responseXML.documentElement.getAttribute('answer');
+        if(answer=='true')
+        {
+            alert('Done');
+        }
+    }
+}
+
+//FOR UI PAGE REDIECTION
+var w= getTopWindow();
+    var newWindow=w.open("/incident.do?sys_id="+g_form.getUniqueValue());
+    newWindow.focus();
