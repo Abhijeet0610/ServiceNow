@@ -1,0 +1,58 @@
+var gr1 = new GlideRecord("resource_plan");
+gr1.addEncodedQuery('task=4111d256972d611008b471571153af1c');
+gr1.query();
+var currentMonth =new GlideDate().getMonthNoTZ();
+var year=new Date();
+var fullYear=year.getFullYear();
+while(gr1.next())
+{
+if(currentMonth==1)
+{
+    var rp = new ResourcePlan(current);
+    var newPlanId = rp.clone(ResourcePlanState.PLANNING);
+    var gr= new GlideRecord('resource_plan');
+    var op=gr.getValue("operational_work_type");
+    var owt= op.toUpperCase().slice(0,1);
+    gr.get(newPlanID);
+    gr.setValue('short_description',gr.group_resource+''+owt +' Q1 '+fullYear);
+    var gdt = new GlideDateTime(gs.now());
+    var gdtS=gdt.addDays(91);
+    var gdtE=gdt.addDays(181);
+    gr.setValue('start_date',gdtS);
+    gr.setValue('end_date',gdtE);
+    gr.update();
+}
+else if(currentMonth==4)
+{
+    var rp = new ResourcePlan(current);
+    var newPlanId = rp.clone(ResourcePlanState.PLANNING);
+    var gr= new GlideRecord('resource_plan');
+    gr.get(newPlanID);
+    var op=gr.getValue("operational_work_type");
+    var owt= op.toUpperCase().slice(0,1);
+    gr.setValue('short_description',gr.group_resource+''+owt+' Q3 '+fullYear);
+    gr.update();
+}
+else if(currentMonth==7)
+{
+    var rp = new ResourcePlan(current);
+    var newPlanId = rp.clone(ResourcePlanState.PLANNING);
+    var gr= new GlideRecord('resource_plan');
+    gr.get(newPlanID);
+    var op=gr.getValue("operational_work_type");
+    var owt= op.toUpperCase().slice(0,1);
+    gr.setValue('short_description',gr.group_resource+''+owt+' Q3 '+fullYear);
+    gr.update();
+}
+else if(currentMonth==10)
+{
+    var rp = new ResourcePlan(current);
+    var newPlanId = rp.clone(ResourcePlanState.PLANNING);
+    var gr= new GlideRecord('resource_plan');
+    gr.get(newPlanID);
+    var op=gr.getValue("operational_work_type");
+    var owt= op.toUpperCase().slice(0,1);
+    gr.setValue('short_description',gr.group_resource+''+owt+' Q4 '+fullYear);
+    gr.update();
+}
+}
